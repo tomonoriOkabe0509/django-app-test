@@ -1,0 +1,77 @@
+{% load static %}
+
+<style>
+body {
+    background-image: url("{% static 'images/hospital.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    background: rgba(255,255,255,0.9);
+    width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 10px;
+}
+</style>
+
+
+<div class="container">
+
+<h1>透析除水計算</h1>
+
+<form method="POST">
+{% csrf_token %}
+
+<p>日付</p>
+<input type="date" name="date">
+
+<p>患者ID</p>
+<input type="text" name="patient_id">
+
+<p>名前</p>
+<input type="text" name="name">
+
+<p>現在体重 (kg)</p>
+<input type="number" step="0.1" name="weight">
+
+<p>DW (kg)</p>
+<input type="number" step="0.1" name="dw">
+
+<p>透析時間 (時間)</p>
+<input type="number" step="0.1" name="time">
+
+<br><br>
+
+<button type="submit">計算・保存</button>
+
+</form>
+
+{% if result %}
+<h2>結果</h2>
+<p>除水量: {{ result.uf }} L</p>
+<p>除水速度: {{ result.rate }} L/h</p>
+{% endif %}
+
+{% if alert %}
+<p style="color:red">{{ alert }}</p>
+{% endif %}
+
+</div><style>
+  input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+  }
+  
+  button {
+      width: 100%;
+      padding: 10px;
+      background: #2c7be5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+  }
+  </style>

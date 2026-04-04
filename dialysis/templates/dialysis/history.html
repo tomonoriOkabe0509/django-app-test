@@ -1,0 +1,22 @@
+<h1>透析履歴</h1>
+
+<table border="1">
+<tr>
+<th>日付</th>
+<th>ID</th>
+<th>名前</th>
+<th>除水量</th>
+<th>除水速度</th>
+</tr>
+
+{% for r in records %}
+<tr>
+<td>{{ r.date }}</td>
+<td>{{ r.patient_id }}</td>
+<td>{{ r.name }}</td>
+<td>{{ r.uf }}</td>
+<td>{{ r.rate }}</td>
+</tr>
+{% endfor %}
+
+</table>
