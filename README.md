@@ -108,7 +108,7 @@
 
 ## ■ URL
 
-（デプロイ先URL or GitHub URL）
+https://github.com/tomonoriOkabe0509/django-app-test
 
 ---
 
