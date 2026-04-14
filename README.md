@@ -72,23 +72,16 @@
 
 ---
 
-## ■ 工夫した点
+■ 工夫した点
+ALBを用いた負荷分散構成を実装
+Auto Scalingにより負荷に応じたスケーリングを実現
+セキュリティグループを分離し、ALB経由のみアクセス可能に設計
+静的ファイルをS3に分離し、Webサーバの負荷軽減
 
-* **セキュリティ設計**
-
-  * RDSをPrivate Subnetに配置し外部遮断
-  * Security Groupで通信制御
-
-* **可用性の確保**
-
-  * Auto Scalingによる冗長化
-  * ALBによる負荷分散
-
-* **運用監視**
-
-  * CloudWatch + SNSによる障害検知・通知
-
----
+■ 苦労した点
+ALBのターゲットグループ設定（ヘルスチェックで詰まった）
+セキュリティグループの設定ミスによる疎通不可
+NginxとGunicornの連携
 
 ## ■ 今後の改善点
 
@@ -107,8 +100,11 @@
 ---
 
 ## ■ URL
-
+github
 https://github.com/tomonoriOkabe0509/django-app-test
+
+ALB
+http://test-alb-614651923.ap-northeast-1.elb.amazonaws.com
 
 ---
 
