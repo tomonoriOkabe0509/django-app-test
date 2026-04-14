@@ -1,0 +1,117 @@
+# AWS × Django Webアプリ構成（ポートフォリオ）
+
+## ■ 概要
+
+本プロジェクトは、AWS上にDjangoアプリケーションの本番環境を構築したポートフォリオです。
+可用性・拡張性・運用監視を意識し、実務に近い構成を意識して設計・構築を行いました。
+
+---
+
+## ■ 構成図
+
+![AWS構成図](https://github.com/user-attachments/assets/1f0ddafc-8edd-4493-93c5-5cb3508c1990)
+
+本構成は、可用性とセキュリティを考慮し、ALB・Auto Scaling・Private Subnet構成を採用しています。
+
+※コスト最適化のためNAT Gatewayは未使用としています
+
+
+---
+
+## ■ 使用技術
+
+### 【インフラ】
+
+* AWS（VPC / EC2 / RDS / S3 / ALB / CloudWatch / SNS / Auto Scaling）
+* Linux（Amazon Linux）
+* Nginx
+* Gunicorn
+
+### 【アプリケーション】
+
+* Python（Django）
+* MySQL（RDS）
+
+### 【その他】
+
+* Git / GitHub
+
+---
+
+## ■ アーキテクチャ構成
+
+### ● ネットワーク
+
+* VPC内にPublic / Private Subnetを分離
+* Public Subnet：EC2（Webサーバ）
+* Private Subnet：RDS（MySQL）
+
+### ● Webサーバ
+
+* EC2上にDjangoアプリを配置
+* Nginx + Gunicornでアプリケーションを配信
+
+### ● データベース
+
+* RDS（MySQL）をPrivate Subnetに配置
+* 外部から直接アクセス不可としセキュリティを確保
+
+### ● ストレージ
+
+* S3に静的ファイルを配置
+
+### ● 負荷分散・可用性
+
+* ALB（Application Load Balancer）を使用
+* Auto Scalingにより負荷に応じてEC2をスケール
+
+### ● 監視・通知
+
+* CloudWatchでリソース監視
+* SNSでアラートをメール通知
+
+---
+
+## ■ 工夫した点
+
+* **セキュリティ設計**
+
+  * RDSをPrivate Subnetに配置し外部遮断
+  * Security Groupで通信制御
+
+* **可用性の確保**
+
+  * Auto Scalingによる冗長化
+  * ALBによる負荷分散
+
+* **運用監視**
+
+  * CloudWatch + SNSによる障害検知・通知
+
+---
+
+## ■ 今後の改善点
+
+* NAT Gateway導入によるPrivate環境の外部通信最適化
+* CI/CD（GitHub Actionsなど）の導入
+* HTTPS対応（ACM + ALB）
+
+---
+
+## ■ 学んだこと
+
+* AWSにおける基本的なインフラ構成の理解
+* Webアプリケーションの本番運用構成
+* 障害監視および通知設計の重要性
+
+---
+
+## ■ URL
+
+（デプロイ先URL or GitHub URL）
+
+---
+
+## ■ 補足
+
+※本構成は学習目的で構築しており、一部コスト最適化のため簡略化している部分があります。
