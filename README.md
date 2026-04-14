@@ -2,8 +2,8 @@
 
 ## ■ 概要
 
-本プロジェクトは、AWS上にDjangoアプリケーションの本番環境を構築したポートフォリオです。
-可用性・拡張性・運用監視を意識し、実務に近い構成を意識して設計・構築を行いました。
+本プロジェクトは、AWS上にDjangoアプリケーションの本番環境を構築し、
+ALBおよびAuto Scalingを用いたスケーラブルな構成の理解を目的として作成しました。
 
 ---
 
@@ -72,16 +72,16 @@
 
 ---
 
-■ 工夫した点
-ALBを用いた負荷分散構成を実装
-Auto Scalingにより負荷に応じたスケーリングを実現
-セキュリティグループを分離し、ALB経由のみアクセス可能に設計
-静的ファイルをS3に分離し、Webサーバの負荷軽減
+## ■ 工夫した点
+- ALBを用いた負荷分散構成を実装
+- Auto Scalingにより負荷に応じたスケーリングを実現
+- セキュリティグループを分離し、ALB経由のみアクセス可能に設計
+- 静的ファイルをS3に分離し、Webサーバの負荷軽減
 
-■ 苦労した点
-ALBのターゲットグループ設定（ヘルスチェックで詰まった）
-セキュリティグループの設定ミスによる疎通不可
-NginxとGunicornの連携
+## ■ 苦労した点
+- ALBのターゲットグループにおけるヘルスチェック設定（HTTPステータスコードの理解）
+- セキュリティグループ間の通信制御による疎通不良の切り分け
+- NginxとGunicornのリバースプロキシ構成の理解
 
 ## ■ 今後の改善点
 
@@ -100,11 +100,11 @@ NginxとGunicornの連携
 ---
 
 ## ■ URL
-github
-https://github.com/tomonoriOkabe0509/django-app-test
+- GitHub：
+  https://github.com/tomonoriOkabe0509/django-app-test
 
-ALB
-http://test-alb-614651923.ap-northeast-1.elb.amazonaws.com
+- アプリケーション：
+  http://test-alb-614651923.ap-northeast-1.elb.amazonaws.com
 
 ---
 
